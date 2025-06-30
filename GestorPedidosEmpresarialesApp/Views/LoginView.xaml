@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestorPedidosEmpresarialesApp.Views"
+        xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
         mc:Ignorable="d"
         Title="Inicio de Sesión"
         Height="450"
@@ -11,6 +12,11 @@
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource BackgroundColor}"
         Foreground="{DynamicResource TextColor}">
+
+    <!-- Asociar el ViewModel -->
+    <Window.DataContext>
+        <vm:LoginViewModel />
+    </Window.DataContext>
 
     <Grid Margin="40">
         <Grid.RowDefinitions>
@@ -22,16 +28,21 @@
 
         <StackPanel Grid.Row="1" Margin="0,20,0,0" VerticalAlignment="Top">
             <TextBlock Text="Correo electrónico"/>
-            <TextBox x:Name="txtCorreo" Height="35" Style="{StaticResource TextBoxStyle}" Text="dfsdfsdfsdfsdf"/>
+            <TextBox Height="35"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
 
             <TextBlock Text="Contraseña" Margin="0,10,0,0"/>
-            <PasswordBox x:Name="txtContrasenna" Height="35" Style="{StaticResource PasswordBoxStyle}"/>
+            <PasswordBox Height="35"
+                         x:Name="txtContrasenna"
+                         PasswordChanged="PasswordBox_PasswordChanged"
+                         Style="{StaticResource PasswordBoxStyle}" />
 
             <Button Content="Iniciar sesión"
                     Height="40"
                     Margin="0,20,0,0"
-                    Click="IniciarSesion_Click"
-                    Style="{StaticResource ButtonStyle}"/>
+                    Command="{Binding IniciarSesionCommand}"
+                    Style="{StaticResource ButtonStyle}" />
         </StackPanel>
     </Grid>
 </Window>
