@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GestorPedidosEmpresarialesApp.Utils
 {
-    internal class SesionActual
+    public static class SesionActual
     {
+        public static Usuario UsuarioLogueado { get; set; }  // Inicializar para evitar null
     }
 }

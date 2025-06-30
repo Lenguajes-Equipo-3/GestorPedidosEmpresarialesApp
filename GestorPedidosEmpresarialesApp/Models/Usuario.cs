@@ -32,6 +32,7 @@ public class Usuario : INotifyPropertyChanged
         set { contrasena = value; OnPropertyChanged(); }
     }
 
+    public Usuario() { }
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string? name = null)
     {
