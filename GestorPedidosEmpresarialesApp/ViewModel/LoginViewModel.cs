@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GestorPedidosEmpresarialesApp.Services;
+using GestorPedidosEmpresarialesApp.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
             if (usuario != null)
             {
                 MessageBox.Show($"Bienvenido, {usuario.Empleado.NombreEmpleado}", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                SesionActual.UsuarioLogueado = usuario;
 
                 var menu = new MainWindow(); // Cambiar por tu ventana principal si tiene otro nombre
                 menu.Show();

@@ -3,14 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GestorPedidosEmpresarialesApp"
+        xmlns:local="clr-namespace:GestorPedidosEmpresarialesApp.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Gestor de Pedidos Empresariales"
+        Height="600" Width="1000"
+        Background="{DynamicResource BackgroundColor}"
+        Foreground="{DynamicResource TextColor}"
+        WindowStartupLocation="CenterScreen">
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="39*"/>
-            <ColumnDefinition Width="161*"/>
+            <ColumnDefinition Width="200"/>
+            <!-- Menú lateral -->
+            <ColumnDefinition Width="*"/>
+            <!-- Contenido -->
         </Grid.ColumnDefinitions>
 
+        <!-- MENÚ LATERAL -->
+        <StackPanel Background="{StaticResource MenuBackground }" Orientation="Vertical">
+            <TextBlock Text="Menú" FontWeight="Bold" FontSize="20" Margin="10" Foreground="White"/>
+
+            <Button Content="Dashboard" Style="{StaticResource MenuButtonStyle}" />
+            <Button Content="Pedidos" Style="{StaticResource MenuButtonStyle}" />
+            <Button Content="Productos" Style="{StaticResource MenuButtonStyle}" />
+            <Button Content="Clientes" Style="{StaticResource MenuButtonStyle}" />
+            <Button Content="Cerrar sesión" Style="{StaticResource MenuButtonStyle}" Click="CerrarSesion_Click"/>
+        </StackPanel>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <Grid Grid.Column="1" Margin="20">
+            <TextBlock Text="Bienvenido al Gestor de Pedidos" FontSize="24" FontWeight="Bold"/>
+            <!-- Aquí podés usar ContentControl o UserControls para cargar vistas -->
+        </Grid>
     </Grid>
 </Window>
