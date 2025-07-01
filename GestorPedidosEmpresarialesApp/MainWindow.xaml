@@ -2,10 +2,15 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
         Title="Gestor de Pedidos Empresariales"
         Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
         Background="#232336">
+
+    <Window.DataContext>
+        <vm:ProductoBaseViewModel />
+    </Window.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -53,7 +58,8 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="PackageVariantClosed" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
                             <TextBlock Text="Producto" Foreground="White" FontSize="14"/>
-                        </StackPanel>
+                                <MenuItem Header="Productos Base" Click="AbrirProductoBaseView_Click" />
+                            </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
 

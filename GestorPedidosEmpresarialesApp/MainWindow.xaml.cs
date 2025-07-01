@@ -61,5 +61,12 @@ namespace GestorPedidosEmpresarialesApp
             // ventanaClientes.Show();
 
         }
+
+        private void AbrirProductoBaseView_Click(object sender, RoutedEventArgs e)
+        {
+            var productoBaseView = new ProductoBaseView();
+            productoBaseView.Show();
+        }
+
     }
 }
