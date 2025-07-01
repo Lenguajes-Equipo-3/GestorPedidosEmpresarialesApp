@@ -50,5 +50,10 @@ namespace GestorPedidosEmpresarialesApp
             login.Show();
             this.Close();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
