@@ -165,8 +165,8 @@
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
-                <!-- Submenú   Rol -->
-                <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}">
+                <!-- Submenú   parameots -->
+                    <MenuItem Height="40" Click="MenuItem_Parametros_Click" Style="{StaticResource DarkSubMenuItemStyle}">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="Tools" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
@@ -207,8 +207,8 @@
 
         <!-- ÁREA DE CONTENIDO -->
         <Grid Grid.Column="1" Background="#2D2D3A">
-            <!-- Aquí cargas tus vistas con un ContentControl -->
-            <TextBlock Text="Punto de venta" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ContentControl Grid.Column="1" x:Name="ContentArea"/>
+
         </Grid>
     </Grid>
 </Window>
