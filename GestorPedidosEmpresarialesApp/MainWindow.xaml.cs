@@ -1,4 +1,5 @@
 ﻿using GestorPedidosEmpresarialesApp.Views;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,6 +50,16 @@ namespace GestorPedidosEmpresarialesApp
             var login = new LoginView();
             login.Show();
             this.Close();
+        }
+
+        private void Ejemplo_Click(object sender, RoutedEventArgs e)
+        {
+            // < MenuItem Header = "Clientes" Click = "Ejemplo_Click" /> ejemplo de la etiquertata
+            // Instancia la nueva ventana
+            //  var ventanaClientes = new ClientesWindow();
+            // Muestra la ventana
+            // ventanaClientes.Show();
+
         }
     }
 }
