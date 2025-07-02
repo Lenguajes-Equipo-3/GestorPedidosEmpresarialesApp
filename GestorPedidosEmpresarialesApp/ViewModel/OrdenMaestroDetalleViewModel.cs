@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GestorPedidosEmpresarialesApp.Models;
+using GestorPedidosEmpresarialesApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace GestorPedidosEmpresarialesApp.ViewModel
 {
@@ -18,16 +20,42 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
         [ObservableProperty] private string direccionViaje = "";
         [ObservableProperty] private ObservableCollection<DetalleOrden> detallesOrden = new();
         [ObservableProperty] private DetalleOrden? detalleSeleccionado;
-        // Propiedades para ciudad, provincia, país, teléfono, etc.
+       
+
+        public string NombreCompletoCliente =>
+            (Orden.Cliente != null)
+            ? $"{Orden.Cliente.NombreContacto} {Orden.Cliente.ApellidoContacto}" // Ajuste a sus propiedades reales
+            : string.Empty;
+
+        [ObservableProperty] private orden orden = new();
 
         public decimal TotalPedido => (decimal)DetallesOrden.Sum(d => d.PrecioLinea);
 
         // Comandos
 
+      
+
+
+      
         [RelayCommand]
-        private void BuscarCliente()
+        private void SeleccionarCliente()
         {
-            // Abrir ventana/búsqueda de cliente y asignar a ClienteSeleccionado
+            // Crear e inicializar la ventana de búsqueda
+            var win = new BuscarClienteWindow();
+            var result = win.ShowDialog();
+
+            if (result == true)
+            {
+                // Obtener el cliente seleccionado desde el ViewModel de la ventana de búsqueda
+                if (win.DataContext is BuscarClienteViewModel vm
+                    && vm.ClienteSeleccionado != null)
+                {
+                    Orden.Cliente = vm.ClienteSeleccionado;
+
+                    // Actualizar NombreCompletoCliente
+                    OnPropertyChanged(nameof(NombreCompletoCliente));
+                }
+            }
         }
 
         [RelayCommand]

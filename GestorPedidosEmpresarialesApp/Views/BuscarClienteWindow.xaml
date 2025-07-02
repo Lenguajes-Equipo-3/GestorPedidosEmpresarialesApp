@@ -1,12 +1,60 @@
 ﻿<Window x:Class="GestorPedidosEmpresarialesApp.Views.BuscarClienteWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GestorPedidosEmpresarialesApp.Views"
-        mc:Ignorable="d"
-        Title="BuscarClienteWindow" Height="450" Width="800">
-    <Grid>
-        
+        xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
+        xmlns:conv="clr-namespace:GestorPedidosEmpresarialesApp.Converters"
+        Title="Buscar Cliente" Height="450" Width="700" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" Background="#181B22">
+    <Window.DataContext>
+        <vm:BuscarClienteViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <conv:NullToBoolConverter x:Key="NullToBoolConverter"/>
+    </Window.Resources>
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!-- Filtro -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBox Width="200"
+                     Margin="0,0,8,0"
+                     Text="{Binding Filtro, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Foreground" Value="Gray"/>
+                        <Setter Property="Text" Value="Buscar por nombre o apellido"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Text" Value=""/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button Content="Buscar" Command="{Binding BuscarCommand}" Width="80"/>
+        </StackPanel>
+        <!-- Tabla de clientes -->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ClientesFiltrados}"
+                  SelectedItem="{Binding ClienteSeleccionado, Mode=TwoWay}"
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="0,12,0,0"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding IdCliente}" Width="60"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding NombreContacto}" Width="*"/>
+                <DataGridTextColumn Header="Apellido" Binding="{Binding ApellidoContacto}" Width="*"/>
+                <DataGridTextColumn Header="Compañia" Binding="{Binding NombreCompania}" Width="*"/>
+                <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!-- Botones -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Seleccionar" Command="{Binding SeleccionarCommand}" Click="Seleccionar_Click" Width="110"
+                    IsEnabled="{Binding ClienteSeleccionado, Converter={StaticResource NullToBoolConverter}}"/>
+            <Button Content="Cancelar" Click="Cancelar_Click" Margin="10,0,0,0" Width="100"/>
+        </StackPanel>
     </Grid>
 </Window>

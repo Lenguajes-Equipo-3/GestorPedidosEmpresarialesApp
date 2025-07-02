@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using GestorPedidosEmpresarialesApp.Models;
 using GestorPedidosEmpresarialesApp.Services;
+using GestorPedidosEmpresarialesApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,10 +21,10 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
         private string filtroNombreCliente = "";
 
         [ObservableProperty]
-        private ObservableCollection<Orden> ordenes = new(); 
+        private ObservableCollection<orden> ordenes = new(); 
 
         [ObservableProperty]
-        private Orden? ordenSeleccionada;
+        private orden? ordenSeleccionada;
 
         // Buscar por nombre de cliente
         [RelayCommand]
@@ -82,13 +83,10 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
         [RelayCommand]
         public void NuevaOrden()
         {
-            // Aquí abre el UserControl de nueva orden, ejemplo:
-            // Si está en MainWindow con MainContent, puede acceder al MainContent por referencia estática o evento.
-            // Ejemplo (forma sencilla, no MVVM puro):
-
-            // ((MainWindow)Application.Current.MainWindow).MainContent.Content = new OrdenMasterDetalleUcView();
-
-            // O use un evento/callback si quiere desacoplar.
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MainWindow.Instance.MainContent.Content = new OrdenMaestroDetalleUcView();
+            });
         }
 
     }
