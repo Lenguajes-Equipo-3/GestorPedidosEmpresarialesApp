@@ -82,5 +82,11 @@ namespace GestorPedidosEmpresarialesApp
             var productoVarianteView = new ProductoVarianteView();
             productoVarianteView.Show();
         }
+
+        private void AbrirDepartamentoView_Click(object sender, RoutedEventArgs e)
+        {
+            var departamentoView = new DepartamentoView();
+            departamentoView.Show();
+        }
     }
 }
