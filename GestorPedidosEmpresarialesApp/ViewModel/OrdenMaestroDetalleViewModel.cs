@@ -86,9 +86,14 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
         }
 
         [RelayCommand]
-        private void AgregarProducto()
+        private void AgregarDetalle()
         {
-            // Abrir diálogo para seleccionar producto y agregar a DetallesOrden
+            Orden.DetallesOrden.Add(DetalleOrden);
+            DetalleOrden = new()
+            {
+                Cantidad = 1,
+                PrecioLinea = 0.0
+            };
         }
 
         [RelayCommand]

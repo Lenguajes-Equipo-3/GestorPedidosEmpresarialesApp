@@ -94,35 +94,35 @@
 FontSize="28" FontWeight="Bold" Foreground="White"
 Margin="0,0,0,10"/>
                 <TextBlock Text="País" Foreground="White"/>
-                <TextBox Width="200" Text="{Binding Orden.PaisViaje}" />
+                <TextBox Width="174" Text="{Binding Orden.PaisViaje}" />
             </StackPanel>
             <StackPanel>
                 <TextBlock Grid.Row="0" Text="" 
 FontSize="28" FontWeight="Bold" Foreground="White"
 Margin="0,0,0,10"/>
                 <TextBlock Text="Provincia" Foreground="White"/>
-                <TextBox Width="200" Text="{Binding Orden.ProvinciaViaje}" />
+                <TextBox Width="176" Text="{Binding Orden.ProvinciaViaje}" />
             </StackPanel>
             <StackPanel>
                 <TextBlock Grid.Row="0" Text="" 
 FontSize="28" FontWeight="Bold" Foreground="White"
 Margin="0,0,0,10"/>
                 <TextBlock Text="Ciudad" Foreground="White"/>
-                <TextBox Width="200" Text="{Binding Orden.CiudadViaje}" />
+                <TextBox Width="174" Text="{Binding Orden.CiudadViaje}" />
             </StackPanel>
             <StackPanel>
                 <TextBlock Grid.Row="0" Text="" 
 FontSize="28" FontWeight="Bold" Foreground="White"
 Margin="0,0,0,10"/>
                 <TextBlock Text="Dirección" Foreground="White"/>
-                <TextBox Width="200" Text="{Binding Orden.DireccionViaje}" />
+                <TextBox Width="189" Text="{Binding Orden.DireccionViaje}" />
             </StackPanel>
             <StackPanel>
                 <TextBlock Grid.Row="0" Text="" 
 FontSize="28" FontWeight="Bold" Foreground="White"
 Margin="0,0,0,10"/>
                 <TextBlock Text="Teléfono" Foreground="White"/>
-                <TextBox Width="200" Text="{Binding Orden.TelefonoViaje}" />
+                <TextBox Width="202" Text="{Binding Orden.TelefonoViaje}" />
             </StackPanel>
         </UniformGrid>
 
@@ -131,23 +131,47 @@ Margin="0,0,0,10"/>
                Foreground="White" FontSize="17" Margin="0,0,0,4"/>
 
         <!-- Campos para agregar detalle -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
-            <Button Content="Buscar Producto" Command="{Binding BuscarProductoCommand}"
-                Background="#6CB2EB" Foreground="White" Padding="12,2" Margin="0,0,10,0"/>
-            <TextBox Width="60" Margin="0,0,6,0" />
-            <TextBox Width="120" Margin="0,0,6,0"/>
-            <TextBox Width="120" Margin="0,0,6,0" />
-            <TextBox Width="60" Margin="0,0,6,0" />
-            <TextBox Width="80" Margin="0,0,6,0" />
-            <TextBox Width="80" Margin="0,0,6,0"  IsReadOnly="True"/>
-            <Button Content="Agregar Detalle" Command="{Binding AgregarDetalleCommand}"
-                Background="#6CB2EB" Foreground="White" Padding="14,2"/>
+        <StackPanel  Grid.Row="4" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Buscar Producto"
+ Command="{Binding BuscarProductoCommand}"
+ Background="#6CB2EB" Foreground="White" Padding="14,2"/>
+            <TextBlock Text="ID" Foreground="White"/>
+            <TextBox Width="60" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.VarianteProducto.IdVariante, Mode=OneWay}" IsReadOnly="True"/>
+
+            <TextBlock Text="Nombre" Foreground="White"/>
+            <TextBox Width="120" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.VarianteProducto.ProductoBase.NombreProducto, Mode=OneWay}" IsReadOnly="True"/>
+
+            <TextBlock Text="Descripcion" Foreground="White"/>
+            <TextBox Width="120" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.VarianteProducto.Descripcion, Mode=OneWay}" IsReadOnly="True"/>
+
+            <TextBlock Text="Cantidad" Foreground="White"/>
+            <TextBox Width="60" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.Cantidad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Precio" Foreground="White"/>
+            <TextBox Width="80" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.VarianteProducto.Precio, Mode=OneWay}" IsReadOnly="True"/>
+
+            <TextBlock Text="Total" Foreground="White"/>
+            <TextBox Width="80" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.PrecioLinea, Mode=OneWay}" IsReadOnly="True"/>
+
+            <Button Content="Agregar Detalle"
+            Command="{Binding AgregarDetalleCommand}"
+            Background="#6CB2EB" Foreground="White" Padding="14,2"/>
+
+        
+
         </StackPanel>
 
         <!-- DataGrid detalles -->
         <DataGrid Grid.Row="5" 
               ItemsSource="{Binding Orden.DetallesOrden}" 
               AutoGenerateColumns="False"
+              CanUserAddRows="False"
               HeadersVisibility="Column" Height="200" 
               Margin="0,0,0,10"
               Background="White">
