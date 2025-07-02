@@ -16,6 +16,9 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
         private ProductoBase producto;
 
         [ObservableProperty]
+        private ProductoBase? productoSeleccionado;
+
+        [ObservableProperty]
         private ObservableCollection<Categoria> categorias;
 
         [ObservableProperty]
@@ -35,6 +38,20 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
 
             CargarCategoriasAsync();
             CargarProductosAsync();
+        }
+
+        partial void OnProductoSeleccionadoChanged(ProductoBase? value)
+        {
+            if (value != null)
+            {
+                Producto = new ProductoBase
+                {
+                    IdProductoBase = value.IdProductoBase,
+                    NombreProducto = value.NombreProducto,
+                    Categoria = value.Categoria,
+                    Eliminado = value.Eliminado
+                };
+            }
         }
 
         private async Task CargarCategoriasAsync()
@@ -73,15 +90,24 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
 
         private async Task GuardarProductoAsync()
         {
-            bool creado = await _productoBaseService.CreateAsync(producto);
-            if (creado)
+            bool resultado;
+            if (Producto.IdProductoBase == 0)
             {
-                await CargarProductosAsync(); // Recargar la tabla después de guardar
-                MessageBox.Show("Producto creado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                resultado = await _productoBaseService.CreateAsync(Producto);
             }
             else
             {
-                MessageBox.Show("Error al crear el producto.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                resultado = await _productoBaseService.UpdateAsync(Producto.IdProductoBase, Producto);
+            }
+
+            if (resultado)
+            {
+                await CargarProductosAsync();
+                MessageBox.Show("Producto guardado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Error al guardar el producto.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
