@@ -89,6 +89,12 @@ namespace GestorPedidosEmpresarialesApp
             departamentoView.Show();
         }
 
+        private void AbrirClienteView_Click(object sender, RoutedEventArgs e)
+        {
+            var clienteView = new ClienteView();
+            clienteView.Show();
+        }
+
         private void MenuItem_Empleados_Click(object sender, RoutedEventArgs e)
         {
             var empleadosView = new EmpleadoView();

@@ -108,7 +108,7 @@
                     </MenuItem.Header>
                 </MenuItem>
                 <!-- Submenú   Clientes -->
-                <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}">
+                    <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}" Click="AbrirClienteView_Click">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="AccountGroup" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>

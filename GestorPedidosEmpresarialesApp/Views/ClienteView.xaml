@@ -1,0 +1,91 @@
+﻿<Window x:Class="GestorPedidosEmpresarialesApp.Views.ClienteView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
+        Title="Gestión de Clientes" Height="700" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundColor}">
+    
+
+    <Window.DataContext>
+        <vm:ClienteViewModel />
+    </Window.DataContext>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="10">
+            <!-- Tabla de clientes -->
+            <DataGrid ItemsSource="{Binding ClientesCargados}"
+                      SelectedItem="{Binding ClienteSeleccionado, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      Margin="0,0,0,10" Height="300">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdCliente}" Width="50" />
+                    <DataGridTextColumn Header="Compañía" Binding="{Binding NombreCompania}" Width="*" />
+                    <DataGridTextColumn Header="Contacto" Binding="{Binding NombreContacto}" Width="*" />
+                    <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="150" />
+                    <DataGridTextColumn Header="País" Binding="{Binding Pais}" Width="150" />
+                
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Formulario dividido en dos columnas -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Columna 1: Información del cliente -->
+                <GroupBox Header="Información del Cliente" Margin="0,0,10,0"  Foreground="{DynamicResource TextColor}" Grid.Column="0" >
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Nombre Compañía:"  Foreground="{DynamicResource TextColor}"/>
+                        <TextBox Text="{Binding Cliente.NombreCompania}" Margin="0,5,0,10" />
+
+                        <TextBlock Text="Nombre Contacto:"  Foreground="{DynamicResource TextColor}" />
+                        <TextBox Text="{Binding Cliente.NombreContacto}" Margin="0,5,0,10"/>
+
+                        <TextBlock Text="Apellido Contacto:"  Foreground="{DynamicResource TextColor}"/>
+                        <TextBox Text="{Binding Cliente.ApellidoContacto}" Margin="0,5,0,10"/>
+
+                        <TextBlock Text="Puesto Contacto:"  Foreground="{DynamicResource TextColor}" />
+                        <TextBox Text="{Binding Cliente.PuestoContacto}" Margin="0,5,0,10"/>
+
+                        <TextBlock Text="Teléfono:"   Foreground="{DynamicResource TextColor}" />
+                        <TextBox Text="{Binding Cliente.Telefono}" Margin="0,5,0,10"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Columna 2: Dirección -->
+                <GroupBox Header="Dirección del Cliente" Foreground="{DynamicResource TextColor}"  Grid.Column="1">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Dirección:"  Foreground="{DynamicResource TextColor}" />
+                        <TextBox Text="{Binding Cliente.Direccion}" Margin="0,5,0,10"/>
+
+                        <TextBlock Text="Ciudad:"   Foreground="{DynamicResource TextColor}" />
+                        <TextBox Text="{Binding Cliente.Ciudad}" Margin="0,5,0,10"/>
+
+                        <TextBlock Text="Provincia:"  Foreground="{DynamicResource TextColor}" />
+                        <TextBox Text="{Binding Cliente.Provincia}" Margin="0,5,0,10"/>
+
+                        <TextBlock Text="Código Postal:"  Foreground="{DynamicResource TextColor}" />
+                        <TextBox Text="{Binding Cliente.CodigoPostal}" Margin="0,5,0,10"/>
+
+                        <TextBlock Text="País:"  Foreground="{DynamicResource TextColor}" />
+                        <TextBox Text="{Binding Cliente.Pais}" Margin="0,5,0,10"/>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+
+            <!-- Botón guardar -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                <Button Content="Guardar" Command="{Binding GuardarClienteCommand}" Width="100" Margin="0,0,10,0" />
+                <Button Content="Eliminar" Command="{Binding EliminarClienteCommand}" CommandParameter="{Binding ClienteSeleccionado}" Width="100" Margin="0,0,10,0" />
+
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Window>
+
+
+
