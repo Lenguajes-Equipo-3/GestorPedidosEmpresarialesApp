@@ -1,4 +1,7 @@
-﻿using GestorPedidosEmpresarialesApp.Views;
+﻿using GestorPedidosEmpresarialesApp.Models;
+using GestorPedidosEmpresarialesApp.Services;
+using GestorPedidosEmpresarialesApp.Utils;
+using GestorPedidosEmpresarialesApp.Views;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Windows;
@@ -21,12 +24,37 @@ namespace GestorPedidosEmpresarialesApp
         public MainWindow()
         {
             InitializeComponent();
-            CargarInicio();
+         
+            Loaded += MainWindow_Loaded; 
+
         }
 
-        private void CargarInicio()
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-           // MainContent.Content = new InicioView(); // Una UserControl que debés crear
+            // Cargar parámetros del sistema al iniciar
+            var parametroService = new ParametroSistemaService();
+            ParametroSistema parametros = await parametroService.GetParametrosAsync();
+
+
+            SesionActual.ParametrosSistema = parametros;
+
+            // Si el usuario logueado no está definido, podrías forzar el login aquí:
+            if (SesionActual.UsuarioLogueado == null)
+            {
+                var loginView = new Views.LoginView();
+                loginView.Show();
+                this.Close();
+                return;
+            }
+
+            // Aquí podrías cargar información específica para la sesión, mostrar bienvenida, etc.
+            // Ejemplo: this.DataContext = new MainWindowViewModel(); // si usas MVVM
+        }
+
+        private void MenuItem_Parametros_Click(object sender, RoutedEventArgs e)
+        {
+            ContentArea.Content = new Views.ParametrosView();
+        
         }
 
         private void BtnInicio_Click(object sender, RoutedEventArgs e)

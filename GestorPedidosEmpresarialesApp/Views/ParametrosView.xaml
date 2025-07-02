@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="GestorPedidosEmpresarialesApp.Views.ParametrosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{DynamicResource BackgroundColor}">
+
+    <UserControl.DataContext>
+        <vm:ParametrosViewModel />
+    </UserControl.DataContext>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Gestión de Parámetros" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   Foreground="{DynamicResource TextColor}" 
+                   Margin="0,0,0,20" />
+
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Nombre Empresa:" Foreground="{DynamicResource TextColor}" />
+            <TextBox Width="300" Text="{Binding Parametro.NombreEmpresa, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" />
+
+            <TextBlock Text="Dirección:" Foreground="{DynamicResource TextColor}" />
+            <TextBox Width="300" Text="{Binding Parametro.Direccion, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" />
+
+            <TextBlock Text="Teléfono:" Foreground="{DynamicResource TextColor}" />
+            <TextBox Width="300" Text="{Binding Parametro.Telefono, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" />
+
+            <TextBlock Text="Correo:" Foreground="{DynamicResource TextColor}" />
+            <TextBox Width="300" Text="{Binding Parametro.Correo, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" />
+
+            <TextBlock Text="Impuesto de Ventas (%):" Foreground="{DynamicResource TextColor}" />
+            <TextBox Width="300" Text="{Binding Parametro.ImpuestoVentas, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" />
+
+            <TextBlock Text="Moneda:" Foreground="{DynamicResource TextColor}" />
+            <TextBox Width="300" Text="{Binding Parametro.Moneda, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" />
+
+            <Button Content="Guardar Cambios" 
+                    Width="150" 
+                    Command="{Binding GuardarCommand}" 
+                    Style="{StaticResource ButtonStyle}" 
+                    Margin="0,20,0,0" />
+        </StackPanel>
+    </Grid>
+</UserControl>
