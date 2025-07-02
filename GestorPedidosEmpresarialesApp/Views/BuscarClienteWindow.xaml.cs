@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace GestorPedidosEmpresarialesApp.Views
 {
     /// <summary>
-    /// Lógica de interacción para OrdenesListView.xaml
+    /// Lógica de interacción para BuscarClienteWindow.xaml
     /// </summary>
-    public partial class OrdenesListView : UserControl
+    public partial class BuscarClienteWindow : Window
     {
-        public OrdenesListView()
+        public BuscarClienteWindow()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

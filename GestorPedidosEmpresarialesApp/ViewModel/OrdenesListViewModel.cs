@@ -78,6 +78,19 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
         {
             _ = VerTodasAsync();
         }
+
+        [RelayCommand]
+        public void NuevaOrden()
+        {
+            // Aquí abre el UserControl de nueva orden, ejemplo:
+            // Si está en MainWindow con MainContent, puede acceder al MainContent por referencia estática o evento.
+            // Ejemplo (forma sencilla, no MVVM puro):
+
+            // ((MainWindow)Application.Current.MainWindow).MainContent.Content = new OrdenMasterDetalleUcView();
+
+            // O use un evento/callback si quiere desacoplar.
+        }
+
     }
 }
 

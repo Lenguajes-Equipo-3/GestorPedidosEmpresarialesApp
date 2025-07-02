@@ -10,23 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GestorPedidosEmpresarialesApp.Views
 {
     /// <summary>
-    /// Lógica de interacción para OrdenesListView.xaml
+    /// Lógica de interacción para OrdenMaestroDetalleUcView.xaml
     /// </summary>
-    public partial class OrdenesListView : UserControl
+    public partial class OrdenMaestroDetalleUcView : UserControl
     {
-        public OrdenesListView()
+        public OrdenMaestroDetalleUcView()
         {
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+       
     }
 }
