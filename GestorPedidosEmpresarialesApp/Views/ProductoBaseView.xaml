@@ -3,8 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
         xmlns:conv="clr-namespace:GestorPedidosEmpresarialesApp.Converters"
-        Title="Gestión de Productos Base" Height="500" Width="800"
-        WindowStartupLocation="CenterScreen">
+        Title="Gestión de Productos Base"
+        Height="600"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundColor}"
+        Foreground="{DynamicResource TextColor}">
 
     <Window.Resources>
         <conv:NewItemPlaceholderConverter x:Key="NewItemPlaceholderConverter" />
@@ -14,17 +18,20 @@
         <vm:ProductoBaseViewModel />
     </Window.DataContext>
 
-    <Grid Margin="10">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Lista de Productos -->
+        <!-- Lista de Productos Base -->
         <DataGrid ItemsSource="{Binding ProductosCargados}" 
-                  SelectedItem="{Binding ProductoSeleccionado, Converter={StaticResource NewItemPlaceholderConverter}, Mode=TwoWay}" 
-                  AutoGenerateColumns="False" 
-                  Grid.Row="0" Margin="0,0,0,10">
+          SelectedItem="{Binding ProductoSeleccionado, Mode=TwoWay}" 
+          AutoGenerateColumns="False" 
+          CanUserAddRows="False" 
+          Style="{StaticResource DataGridStyle}"
+          ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}" 
+            Grid.Row="0" Margin="0,0,0,10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding IdProductoBase}" Width="50" />
                 <DataGridTextColumn Header="Nombre" Binding="{Binding NombreProducto}" Width="*" />
@@ -32,20 +39,25 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- Formulario para editar producto -->
+        <!-- Formulario para editar o registrar un producto -->
         <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,10,0,0">
-            <TextBlock Text="Nombre del Producto:" />
-            <TextBox Text="{Binding Producto.NombreProducto}" Width="200" Margin="0,5,0,10" />
+            <TextBlock Text="Nombre del Producto:" Style="{StaticResource TextBlockStyle}" />
+            <TextBox Text="{Binding Producto.NombreProducto, Mode=TwoWay}" 
+                     Style="{StaticResource TextBoxStyle}" 
+                     Width="300" Margin="0,5,0,10" />
 
-            <TextBlock Text="Categoría:" />
+            <TextBlock Text="Categoría:" Style="{StaticResource TextBlockStyle}" />
             <ComboBox ItemsSource="{Binding Categorias}" 
                       SelectedItem="{Binding Producto.Categoria, Mode=TwoWay}" 
                       DisplayMemberPath="Descripcion" 
-                      Width="200" Margin="0,5,0,10" />
+                      Style="{StaticResource ComboBoxStyle}" 
+                      Width="300" Margin="0,5,0,10" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-                <Button Content="Guardar" Command="{Binding GuardarProductoCommand}" Width="100" Margin="0,0,10,0" />
-                <Button Content="Cargar" Command="{Binding CargarProductoSeleccionadoCommand}" Width="100" />
+                <Button Content="Guardar" Command="{Binding GuardarProductoCommand}" 
+                        Style="{StaticResource ButtonStyle}" Width="100" Margin="0,0,10,0" />
+                <Button Content="Eliminar" Command="{Binding EliminarProductoCommand}" 
+                        Style="{StaticResource ButtonStyle}" Width="100" />
             </StackPanel>
         </StackPanel>
     </Grid>

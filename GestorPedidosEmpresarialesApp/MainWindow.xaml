@@ -118,7 +118,7 @@
                 </MenuItem>
 
             </MenuItem>
-            <MenuItem Height="40">
+                <MenuItem Height="40" Click="MenuItem_Empleados_Click">
                 <MenuItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <iconPacks:PackIconMaterial Kind="AccountBoxOutline" Width="22" Height="22" Foreground="White" Margin="0,0,10,0"/>
