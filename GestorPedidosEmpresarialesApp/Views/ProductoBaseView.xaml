@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
-        <vm:InsertarProductoBaseViewModel />
+        <vm:ProductoBaseViewModel />
     </Window.DataContext>
 
     <Grid Margin="10">

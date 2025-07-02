@@ -1,0 +1,68 @@
+﻿<Window x:Class="GestorPedidosEmpresarialesApp.Views.ProductoVarianteView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
+        xmlns:conv="clr-namespace:GestorPedidosEmpresarialesApp.Converters"
+        Title="Gestión de Variantes de Producto" Height="500" Width="900"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <vm:ProductoVarianteViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <conv:NewItemPlaceholderConverter x:Key="NewItemPlaceholderConverter" />
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Lista de Variantes -->
+        <DataGrid ItemsSource="{Binding Variantes}" 
+                  SelectedItem="{Binding VarianteSeleccionada}" 
+                  AutoGenerateColumns="False" 
+                  Grid.Row="0" Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding IdVariante}" Width="50" />
+                <DataGridTextColumn Header="Producto Base" Binding="{Binding ProductoBase.NombreProducto}" Width="150" />
+                <DataGridTextColumn Header="Talla" Binding="{Binding Talla}" Width="100" />
+                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="200" />
+                <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" Width="100" />
+                <DataGridTextColumn Header="Existencias" Binding="{Binding CantidadExistencias}" Width="100" />
+                <DataGridTextColumn Header="Punto Reorden" Binding="{Binding PuntoReorden}" Width="100" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Formulario para editar variantes -->
+        <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,10,0,0">
+            <TextBlock Text="Producto Base:" />
+            <ComboBox ItemsSource="{Binding ProductosBase}" 
+                      SelectedItem="{Binding VarianteSeleccionada.ProductoBase}" 
+                      DisplayMemberPath="NombreProducto" 
+                      Width="200" Margin="0,5,0,10" />
+
+            <TextBlock Text="Talla:" />
+            <TextBox Text="{Binding VarianteSeleccionada.Talla}" Width="200" Margin="0,5,0,10" />
+
+            <TextBlock Text="Descripción:" />
+            <TextBox Text="{Binding VarianteSeleccionada.Descripcion}" Width="200" Margin="0,5,0,10" />
+
+            <TextBlock Text="Precio:" />
+            <TextBox Text="{Binding VarianteSeleccionada.Precio}" Width="200" Margin="0,5,0,10" />
+
+            <TextBlock Text="Existencias:" />
+            <TextBox Text="{Binding VarianteSeleccionada.CantidadExistencias}" Width="200" Margin="0,5,0,10" />
+
+            <TextBlock Text="Punto de Reorden:" />
+            <TextBox Text="{Binding VarianteSeleccionada.PuntoReorden}" Width="200" Margin="0,5,0,10" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                <Button Content="Guardar" Command="{Binding GuardarVarianteCommand}" Width="100" Margin="0,0,10,0" />
+                <Button Content="Eliminar" Command="{Binding EliminarVarianteCommand}" Width="100" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

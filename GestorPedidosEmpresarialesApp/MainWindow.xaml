@@ -58,7 +58,7 @@
                 </MenuItem>
 
                 <!-- Submenú Inventario -->
-                <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}">
+                    <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}" Click="AbrirProductoVarianteView_Click">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="ArchiveOutline" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
