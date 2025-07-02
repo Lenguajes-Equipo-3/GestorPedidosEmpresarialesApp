@@ -79,6 +79,7 @@ namespace GestorPedidosEmpresarialesApp
             productoVarianteView.Show();
         }
 
+
         
         private void AbrirOrdenesView_Click(object sender, RoutedEventArgs e)
         {
@@ -86,6 +87,17 @@ namespace GestorPedidosEmpresarialesApp
 
         }
 
+        private void AbrirDepartamentoView_Click(object sender, RoutedEventArgs e)
+        {
+            var departamentoView = new DepartamentoView();
+            departamentoView.Show();
+        }
+
+        private void MenuItem_Empleados_Click(object sender, RoutedEventArgs e)
+        {
+            var empleadosView = new EmpleadoView();
+            empleadosView.Show();
+        }
 
     }
 }

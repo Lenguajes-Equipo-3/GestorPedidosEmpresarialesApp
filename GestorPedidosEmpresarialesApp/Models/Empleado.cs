@@ -1,75 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 
 namespace GestorPedidosEmpresarialesApp.Models
 {
-    public class Empleado : INotifyPropertyChanged
+
+    public partial class Empleado : ObservableObject
     {
-        private int idEmpleado;
-        public int IdEmpleado
+        [ObservableProperty]
+        private int _idEmpleado;
+
+        [ObservableProperty]
+        private string _nombreEmpleado = "";
+
+        [ObservableProperty]
+        private string _apellidosEmpleado = "";
+
+        [ObservableProperty]
+        private string? _puesto;
+
+        [ObservableProperty]
+        private string? _extension;
+
+        [ObservableProperty]
+        private string? _telefonoTrabajo;
+
+        private Departamento? _departamento;
+        public Departamento? Departamento
         {
-            get => idEmpleado;
-            set { idEmpleado = value; OnPropertyChanged(); }
+            get => _departamento;
+            set => SetProperty(ref _departamento, value);
         }
 
-        private string nombreEmpleado;
-        public string NombreEmpleado
+        private Rol? _rol;
+        public Rol? Rol
         {
-            get => nombreEmpleado;
-            set { nombreEmpleado = value; OnPropertyChanged(); }
-        }
-
-        private string apellidosEmpleado;
-        public string ApellidosEmpleado
-        {
-            get => apellidosEmpleado;
-            set { apellidosEmpleado = value; OnPropertyChanged(); }
-        }
-
-        private string puesto;
-        public string Puesto
-        {
-            get => puesto;
-            set { puesto = value; OnPropertyChanged(); }
-        }
-
-        private string extension;
-        public string Extension
-        {
-            get => extension;
-            set { extension = value; OnPropertyChanged(); }
-        }
-
-        private string telefonoTrabajo;
-        public string TelefonoTrabajo
-        {
-            get => telefonoTrabajo;
-            set { telefonoTrabajo = value; OnPropertyChanged(); }
-        }
-
-        private Rol rol;
-        public Rol Rol
-        {
-            get => rol;
-            set { rol = value; OnPropertyChanged(); }
-        }
-
-        private Departamento departamento;
-        public Departamento Departamento
-        {
-            get => departamento;
-            set { departamento = value; OnPropertyChanged(); }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string? name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            get => _rol;
+            set => SetProperty(ref _rol, value);
         }
     }
 }
