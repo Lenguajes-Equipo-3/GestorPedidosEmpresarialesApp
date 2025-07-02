@@ -1,20 +1,24 @@
+using System;
 using System.Globalization;
 using System.Windows.Data;
 
 namespace GestorPedidosEmpresarialesApp.Converters
 {
-    public class NullToBoolConverter : IValueConverter
+    public class NewItemPlaceholderConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null;
+            // Si el valor es {NewItemPlaceholder}, devuelve null
+            if (value?.ToString() == "{NewItemPlaceholder}")
+                return null;
+
+            return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            // No se necesita lógica para ConvertBack en este caso
+            return value;
         }
     }
 }
-
