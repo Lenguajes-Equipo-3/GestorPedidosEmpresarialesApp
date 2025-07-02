@@ -59,4 +59,8 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
                 ProductosFiltrados = new ObservableCollection<ProductoVariante>(filtrados);
             }
         }
+
+    
+
     }
+}

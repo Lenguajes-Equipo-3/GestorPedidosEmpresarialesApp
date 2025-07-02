@@ -2,10 +2,20 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
+        xmlns:conv="clr-namespace:GestorPedidosEmpresarialesApp.Converters"
         Title="Buscar Producto" Height="420" Width="650" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Window.DataContext>
+        
         <vm:BuscarProductoViewModel />
+        
     </Window.DataContext>
+    
+      <Window.Resources>
+    <conv:NullToBoolConverter x:Key="NullToBoolConverter"/>
+    </Window.Resources>
+
+
+
     <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,7 +30,7 @@
         </StackPanel>
 
         <!-- DataGrid de productos -->
-        <DataGrid Grid.Row="1"
+        <DataGrid Grid.Row="0"
                   ItemsSource="{Binding ProductosFiltrados}"
                   SelectedItem="{Binding ProductoSeleccionado, Mode=TwoWay}"
                   AutoGenerateColumns="False"
@@ -29,9 +39,9 @@
                   CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding IdVariante}" Width="60"/>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="180"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding ProductoBase.NombreProducto}" Width="180"/>
                 <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="180"/>
-                <DataGridTextColumn Header="Precio" Binding="{Binding PrecioUnitario}" Width="80"/>
+                <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -90,22 +90,37 @@
         <!-- Datos generales de la orden (país, provincia, ciudad, dirección, teléfono) -->
         <UniformGrid Grid.Row="2" Columns="5" Margin="0,0,0,12" HorizontalAlignment="Left">
             <StackPanel>
+                <TextBlock Grid.Row="0" Text="" 
+FontSize="28" FontWeight="Bold" Foreground="White"
+Margin="0,0,0,10"/>
                 <TextBlock Text="País" Foreground="White"/>
                 <TextBox Width="200" Text="{Binding Orden.PaisViaje}" />
             </StackPanel>
             <StackPanel>
+                <TextBlock Grid.Row="0" Text="" 
+FontSize="28" FontWeight="Bold" Foreground="White"
+Margin="0,0,0,10"/>
                 <TextBlock Text="Provincia" Foreground="White"/>
                 <TextBox Width="200" Text="{Binding Orden.ProvinciaViaje}" />
             </StackPanel>
             <StackPanel>
+                <TextBlock Grid.Row="0" Text="" 
+FontSize="28" FontWeight="Bold" Foreground="White"
+Margin="0,0,0,10"/>
                 <TextBlock Text="Ciudad" Foreground="White"/>
                 <TextBox Width="200" Text="{Binding Orden.CiudadViaje}" />
             </StackPanel>
             <StackPanel>
+                <TextBlock Grid.Row="0" Text="" 
+FontSize="28" FontWeight="Bold" Foreground="White"
+Margin="0,0,0,10"/>
                 <TextBlock Text="Dirección" Foreground="White"/>
                 <TextBox Width="200" Text="{Binding Orden.DireccionViaje}" />
             </StackPanel>
             <StackPanel>
+                <TextBlock Grid.Row="0" Text="" 
+FontSize="28" FontWeight="Bold" Foreground="White"
+Margin="0,0,0,10"/>
                 <TextBlock Text="Teléfono" Foreground="White"/>
                 <TextBox Width="200" Text="{Binding Orden.TelefonoViaje}" />
             </StackPanel>
@@ -116,7 +131,7 @@
                Foreground="White" FontSize="17" Margin="0,0,0,4"/>
 
         <!-- Campos para agregar detalle -->
-        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,0,0,10">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
             <Button Content="Buscar Producto" Command="{Binding BuscarProductoCommand}"
                 Background="#6CB2EB" Foreground="White" Padding="12,2" Margin="0,0,10,0"/>
             <TextBox Width="60" Margin="0,0,6,0" />

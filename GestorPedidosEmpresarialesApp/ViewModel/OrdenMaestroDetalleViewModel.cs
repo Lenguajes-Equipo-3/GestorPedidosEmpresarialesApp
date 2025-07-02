@@ -16,27 +16,54 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
     public partial class OrdenMaestroDetalleViewModel : ObservableObject
     {
         [ObservableProperty] private Cliente? clienteSeleccionado;
+        [ObservableProperty] private ProductoVariante produtoSeleccionado;
         [ObservableProperty] private DateTime fechaOrden = DateTime.Now;
         [ObservableProperty] private string direccionViaje = "";
         [ObservableProperty] private ObservableCollection<DetalleOrden> detallesOrden = new();
         [ObservableProperty] private DetalleOrden? detalleSeleccionado;
-       
+        [ObservableProperty] private DetalleOrden detalleOrden = new()
+        {
+            Cantidad = 1,
+            PrecioLinea = 0.0
+        };
+
+        [ObservableProperty] private orden orden = new();
+
+        public decimal TotalPedido => (decimal)DetallesOrden.Sum(d => d.PrecioLinea);
+
 
         public string NombreCompletoCliente =>
             (Orden.Cliente != null)
             ? $"{Orden.Cliente.NombreContacto} {Orden.Cliente.ApellidoContacto}" // Ajuste a sus propiedades reales
             : string.Empty;
 
-        [ObservableProperty] private orden orden = new();
-
-        public decimal TotalPedido => (decimal)DetallesOrden.Sum(d => d.PrecioLinea);
-
-        // Comandos
-
-      
 
 
-      
+       
+
+        [RelayCommand]
+        private void BuscarProducto()
+        {
+            // Crear e inicializar la ventana de búsqueda
+            var win = new BuscarProductoWindow();
+            var result = win.ShowDialog();
+
+            if (result == true)
+            {
+                // Obtener el cliente seleccionado desde el ViewModel de la ventana de búsqueda
+                if (win.DataContext is BuscarProductoViewModel vm
+                    && vm.ProductoSeleccionado != null)
+                {
+                    DetalleOrden.VarianteProducto = vm.ProductoSeleccionado;
+
+                    // Actualizar NombreCompletoCliente
+                 
+                }
+            }
+        }
+
+
+
         [RelayCommand]
         private void SeleccionarCliente()
         {
@@ -52,7 +79,7 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
                 {
                     Orden.Cliente = vm.ClienteSeleccionado;
 
-                    // Actualizar NombreCompletoCliente
+
                     OnPropertyChanged(nameof(NombreCompletoCliente));
                 }
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorPedidosEmpresarialesApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,29 @@ namespace GestorPedidosEmpresarialesApp.Views
         public BuscarProductoWindow()
         {
             InitializeComponent();
+        }
+
+
+        private void Seleccionar_Click(object sender, RoutedEventArgs e)
+        {
+            // Verifica si hay un cliente seleccionado
+            if (DataContext is BuscarProductoViewModel vm && vm.ProductoSeleccionado != null)
+            {
+                this.DialogResult = true; // Señala selección exitosa
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Producto.", "Atención", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+
+        }
+
+        private void Cancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
         }
     }
 }
