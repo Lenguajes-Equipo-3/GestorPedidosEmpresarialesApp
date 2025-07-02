@@ -20,13 +20,6 @@ namespace GestorPedidosEmpresarialesApp.Models
             set { descripcion = value; OnPropertyChanged(); }
         }
 
-        private bool eliminado;
-        public bool Eliminado
-        {
-            get => eliminado;
-            set { eliminado = value; OnPropertyChanged(); }
-        }
-
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string? name = null)
         {

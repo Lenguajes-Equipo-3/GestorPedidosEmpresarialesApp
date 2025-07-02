@@ -2,7 +2,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GestorPedidosEmpresarialesApp.Models;
 using GestorPedidosEmpresarialesApp.Services;
-using GestorPedidosEmpresarialesApp.Views;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,34 +13,75 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
         private readonly ProductoBaseService _productoBaseService = new();
 
         [ObservableProperty]
-        private ObservableCollection<ProductoBase> productosBase;
+        private ProductoBase producto;
 
         [ObservableProperty]
-        private ProductoBase? productoSeleccionado;
+        private ObservableCollection<Categoria> categorias;
 
-        public IRelayCommand CargarProductosCommand { get; }
-        public IRelayCommand EliminarProductoCommand { get; }
-        public IRelayCommand ActualizarProductoCommand { get; }
-        public IRelayCommand EditarProductoCommand { get; }
+        [ObservableProperty]
+        private ObservableCollection<ProductoBase> productosCargados;
+
+        public IRelayCommand GuardarProductoCommand { get; }
+        public IRelayCommand<ProductoBase> EliminarProductoCommand { get; }
 
         public ProductoBaseViewModel()
         {
-            productosBase = new ObservableCollection<ProductoBase>();
-            CargarProductosAsync(); // Carga los productos al inicializar el ViewModel
+            producto = new ProductoBase();
+            categorias = new ObservableCollection<Categoria>();
+            productosCargados = new ObservableCollection<ProductoBase>();
+
+            GuardarProductoCommand = new AsyncRelayCommand(GuardarProductoAsync);
             EliminarProductoCommand = new AsyncRelayCommand<ProductoBase>(EliminarProductoAsync);
-            EditarProductoCommand = new RelayCommand<ProductoBase>(EditarProducto);
+
+            CargarCategoriasAsync();
+            CargarProductosAsync();
+        }
+
+        private async Task CargarCategoriasAsync()
+        {
+            var categoriasObtenidas = await _productoBaseService.GetAllCategoriasAsync();
+            if (categoriasObtenidas != null)
+            {
+                categorias.Clear();
+                foreach (var categoria in categoriasObtenidas)
+                {
+                    categorias.Add(categoria);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error al cargar las categorías.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private async Task CargarProductosAsync()
         {
-            var productos = await _productoBaseService.GetAllAsync();
-            if (productos != null)
+            var productosObtenidos = await _productoBaseService.GetAllAsync();
+            if (productosObtenidos != null)
             {
-                ProductosBase.Clear();
-                foreach (var producto in productos)
+                productosCargados.Clear();
+                foreach (var producto in productosObtenidos)
                 {
-                    ProductosBase.Add(producto);
+                    productosCargados.Add(producto);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Error al cargar los productos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async Task GuardarProductoAsync()
+        {
+            bool creado = await _productoBaseService.CreateAsync(producto);
+            if (creado)
+            {
+                await CargarProductosAsync(); // Recargar la tabla después de guardar
+                MessageBox.Show("Producto creado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Error al crear el producto.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -49,30 +89,21 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
         {
             if (producto != null)
             {
-                var resultado = MessageBox.Show($"¿Estás seguro de que deseas eliminar el producto '{producto.NombreProducto}'?", 
+                var resultado = MessageBox.Show($"¿Estás seguro de que deseas eliminar el producto '{producto.NombreProducto}'?",
                                                 "Confirmar eliminación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (resultado == MessageBoxResult.Yes)
                 {
                     bool eliminado = await _productoBaseService.DeleteAsync(producto.IdProductoBase);
                     if (eliminado)
                     {
+                        productosCargados.Remove(producto);
                         MessageBox.Show("Producto eliminado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                        await CargarProductosAsync(); // Recarga los productos después de eliminar
                     }
                     else
                     {
                         MessageBox.Show("Error al eliminar el producto.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-            }
-        }
-
-        private void EditarProducto(ProductoBase? producto)
-        {
-            if (producto != null)
-            {
-               
-                CargarProductosAsync(); // Recarga los productos después de editar
             }
         }
     }

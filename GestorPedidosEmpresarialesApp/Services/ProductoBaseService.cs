@@ -91,5 +91,19 @@ namespace GestorPedidosEmpresarialesApp.Services
                 return false;
             }
         }
+
+        // Obtener todas las categorías
+        public async Task<IEnumerable<Categoria>?> GetAllCategoriasAsync()
+        {
+            try
+            {
+                return await _httpClient.GetFromJsonAsync<IEnumerable<Categoria>>($"{baseUrl}/api/Categoria");
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"Error al obtener categorías: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

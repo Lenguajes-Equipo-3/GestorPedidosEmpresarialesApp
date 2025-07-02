@@ -1,6 +1,5 @@
 ﻿using GestorPedidosEmpresarialesApp.Models;
-using GestorPedidosEmpresarialesApp.Services;
-using GestorPedidosEmpresarialesApp.Utils;
+using GestorPedidosEmpresarialesApp.ViewModel;
 using GestorPedidosEmpresarialesApp.Views;
 using System.Reflection.PortableExecutable;
 using System.Text;
@@ -24,37 +23,12 @@ namespace GestorPedidosEmpresarialesApp
         public MainWindow()
         {
             InitializeComponent();
-         
-            Loaded += MainWindow_Loaded; 
-
+            CargarInicio();
         }
 
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void CargarInicio()
         {
-            // Cargar parámetros del sistema al iniciar
-            var parametroService = new ParametroSistemaService();
-            ParametroSistema parametros = await parametroService.GetParametrosAsync();
-
-
-            SesionActual.ParametrosSistema = parametros;
-
-            // Si el usuario logueado no está definido, podrías forzar el login aquí:
-            if (SesionActual.UsuarioLogueado == null)
-            {
-                var loginView = new Views.LoginView();
-                loginView.Show();
-                this.Close();
-                return;
-            }
-
-            // Aquí podrías cargar información específica para la sesión, mostrar bienvenida, etc.
-            // Ejemplo: this.DataContext = new MainWindowViewModel(); // si usas MVVM
-        }
-
-        private void MenuItem_Parametros_Click(object sender, RoutedEventArgs e)
-        {
-            ContentArea.Content = new Views.ParametrosView();
-        
+           // MainContent.Content = new InicioView(); // Una UserControl que debés crear
         }
 
         private void BtnInicio_Click(object sender, RoutedEventArgs e)
@@ -93,8 +67,14 @@ namespace GestorPedidosEmpresarialesApp
         private void AbrirProductoBaseView_Click(object sender, RoutedEventArgs e)
         {
             var productoBaseView = new ProductoBaseView();
+
             productoBaseView.Show();
         }
 
+        private void AbrirCategoriaView_Click(object sender, RoutedEventArgs e)
+        {
+            var categoriaView = new CategoriaView();
+            categoriaView.Show();
+        }
     }
 }

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GestorPedidosEmpresarialesApp.Views
 {
     /// <summary>
-    /// Lógica de interacción para EditarProductoBaseView.xaml
+    /// Lógica de interacción para CategoriaView.xaml
     /// </summary>
-    public partial class EditarProductoBaseView : Window
+    public partial class CategoriaView : Window
     {
-        public EditarProductoBaseView()
+        public CategoriaView()
         {
             InitializeComponent();
         }

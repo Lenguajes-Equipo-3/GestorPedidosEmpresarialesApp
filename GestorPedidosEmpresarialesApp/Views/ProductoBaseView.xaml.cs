@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorPedidosEmpresarialesApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,19 @@ using System.Windows.Shapes;
 namespace GestorPedidosEmpresarialesApp.Views
 {
     /// <summary>
-    /// Lógica de interacción para ProductoBaseView.xaml
+    /// Lógica de interacción para InsertarProductoBaseView.xaml
     /// </summary>
     public partial class ProductoBaseView : Window
     {
         public ProductoBaseView()
         {
             InitializeComponent();
+            DataContext = new ProductoBaseViewModel();
+        }
+
+        private void Cancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -2,15 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
         Title="Gestor de Pedidos Empresariales"
         Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
         Background="#232336">
-
-    <Window.DataContext>
-        <vm:ProductoBaseViewModel />
-    </Window.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -53,12 +48,11 @@
                 </MenuItem.Header>
 
                 <!-- Submenú Producto -->
-                <MenuItem Height="40"  Style="{StaticResource DarkSubMenuItemStyle}">
+                    <MenuItem Height="40"  Style="{StaticResource DarkSubMenuItemStyle}" Click="AbrirProductoBaseView_Click">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="PackageVariantClosed" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
-                            <TextBlock Text="Producto" Foreground="White" FontSize="14"/>
-                                <MenuItem Header="Productos Base" Click="AbrirProductoBaseView_Click" />
+                                <TextBlock Text="Producto" Foreground="White" FontSize="14"/>
                             </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
@@ -74,7 +68,7 @@
                 </MenuItem>
 
                 <!-- Submenú Categorias -->
-                <MenuItem Height="40"  Style="{StaticResource DarkSubMenuItemStyle}">
+                <MenuItem Height="40"  Style="{StaticResource DarkSubMenuItemStyle}" Click="AbrirCategoriaView_Click" >
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="TagMultipleOutline" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
@@ -171,8 +165,8 @@
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
-                <!-- Submenú   parameots -->
-                    <MenuItem Height="40" Click="MenuItem_Parametros_Click" Style="{StaticResource DarkSubMenuItemStyle}">
+                <!-- Submenú   Rol -->
+                <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="Tools" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
@@ -213,8 +207,8 @@
 
         <!-- ÁREA DE CONTENIDO -->
         <Grid Grid.Column="1" Background="#2D2D3A">
-            <ContentControl Grid.Column="1" x:Name="ContentArea"/>
-
+            <!-- Aquí cargas tus vistas con un ContentControl -->
+            <TextBlock Text="Punto de venta" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>
