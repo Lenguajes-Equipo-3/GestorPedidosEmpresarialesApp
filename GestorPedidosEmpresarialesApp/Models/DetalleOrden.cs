@@ -44,7 +44,7 @@ namespace GestorPedidosEmpresarialesApp.Models
             get => eliminado;
             set { eliminado = value; OnPropertyChanged(); }
         }
-        private void CalcularPrecioLinea()
+        public void CalcularPrecioLinea()
         {
             if (VarianteProducto != null)
                 PrecioLinea = Cantidad * (Double)VarianteProducto.Precio;

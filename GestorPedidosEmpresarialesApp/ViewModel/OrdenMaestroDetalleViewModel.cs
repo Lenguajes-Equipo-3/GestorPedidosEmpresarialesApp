@@ -55,9 +55,9 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
                     && vm.ProductoSeleccionado != null)
                 {
                     DetalleOrden.VarianteProducto = vm.ProductoSeleccionado;
+                    DetalleOrden.CalcularPrecioLinea(); // Asegurarse de que el precio se calcule correctamente
+                                                        // Actualizar NombreCompletoCliente
 
-                    // Actualizar NombreCompletoCliente
-                 
                 }
             }
         }
