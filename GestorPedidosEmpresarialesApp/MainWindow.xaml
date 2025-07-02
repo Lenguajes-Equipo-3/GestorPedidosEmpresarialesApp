@@ -108,7 +108,7 @@
                     </MenuItem.Header>
                 </MenuItem>
                 <!-- Submenú   Clientes -->
-                <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}">
+                    <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}" Click="AbrirClienteView_Click">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="AccountGroup" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
@@ -157,7 +157,7 @@
                 </MenuItem>
 
                 <!-- Submenú   Rol -->
-                <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}">
+                <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}" Click="MenuItem_Roles_Click"  >
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="AccountCogOutline" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
@@ -165,8 +165,9 @@
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
-                <!-- Submenú   Rol -->
+
                     <MenuItem Height="40" Click="MenuParametros_Click" Style="{StaticResource DarkSubMenuItemStyle}">
+
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="Tools" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
