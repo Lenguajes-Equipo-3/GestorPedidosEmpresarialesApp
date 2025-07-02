@@ -94,5 +94,15 @@ namespace GestorPedidosEmpresarialesApp
             var empleadosView = new EmpleadoView();
             empleadosView.Show();
         }
+        private void MenuItem_Roles_Click(object sender, RoutedEventArgs e)
+        {
+            var rolView = new RolView();
+            rolView.Show();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

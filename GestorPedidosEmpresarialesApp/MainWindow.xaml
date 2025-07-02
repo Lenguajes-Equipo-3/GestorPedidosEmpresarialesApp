@@ -157,7 +157,7 @@
                 </MenuItem>
 
                 <!-- Submenú   Rol -->
-                <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}">
+                <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}" Click="MenuItem_Roles_Click"  >
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="AccountCogOutline" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
@@ -165,7 +165,7 @@
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
-                <!-- Submenú   Rol -->
+                <!-- Submenú   Parametros -->
                 <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
