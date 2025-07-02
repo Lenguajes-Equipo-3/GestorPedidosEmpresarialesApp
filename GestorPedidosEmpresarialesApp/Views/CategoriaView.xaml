@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
         Title="Gestión de Categorías" Height="400" Width="600"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundColor}"
+        Foreground="{DynamicResource TextColor}">
 
     <Window.DataContext>
         <vm:CategoriaViewModel />
@@ -19,6 +21,8 @@
         <DataGrid ItemsSource="{Binding Categorias}" 
                   SelectedItem="{Binding CategoriaSeleccionada}" 
                   AutoGenerateColumns="False" 
+                  Style="{StaticResource DataGridStyle}" 
+                  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}" 
                   Grid.Row="0" Margin="0,0,0,10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding IdCategoria}" Width="50" />
@@ -28,8 +32,10 @@
 
         <!-- Botones -->
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
-            <Button Content="Guardar" Command="{Binding GuardarCategoriaCommand}" Width="100" Margin="0,0,10,0" />
-            <Button Content="Eliminar" Command="{Binding EliminarCategoriaCommand}" Width="100" />
+            <Button Content="Guardar" Command="{Binding GuardarCategoriaCommand}" 
+                    Style="{StaticResource ButtonStyle}" Width="100" Margin="0,0,10,0" />
+            <Button Content="Eliminar" Command="{Binding EliminarCategoriaCommand}" 
+                    Style="{StaticResource ButtonStyle}" Width="100" />
         </StackPanel>
     </Grid>
 </Window>
