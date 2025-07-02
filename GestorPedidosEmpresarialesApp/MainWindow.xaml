@@ -89,7 +89,7 @@
                 </MenuItem.Header>
 
                 <!-- Submenú ordenes  -->
-                <MenuItem Height="40"  Style="{StaticResource DarkSubMenuItemStyle}">
+                    <MenuItem Height="40" Click="AbrirOrdenesView_Click" Style="{StaticResource DarkSubMenuItemStyle}">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="Cart" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
@@ -165,8 +165,9 @@
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
-                <!-- Submenú   Parametros -->
-                <MenuItem Height="40" Style="{StaticResource DarkSubMenuItemStyle}">
+
+                    <MenuItem Height="40" Click="MenuParametros_Click" Style="{StaticResource DarkSubMenuItemStyle}">
+
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <iconPacks:PackIconMaterial Kind="Tools" Width="20" Height="20" Foreground="White" Margin="0,0,8,0"/>
@@ -209,6 +210,7 @@
         <Grid Grid.Column="1" Background="#2D2D3A">
             <!-- Aquí cargas tus vistas con un ContentControl -->
             <TextBlock Text="Punto de venta" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ContentControl x:Name="MainContent" />
         </Grid>
     </Grid>
 </Window>

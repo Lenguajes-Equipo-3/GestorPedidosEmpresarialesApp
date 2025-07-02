@@ -22,13 +22,13 @@ namespace GestorPedidosEmpresarialesApp.Services
         }
 
         // GET: Obtener todas las órdenes
-        public async Task<List<Orden>?> GetOrdenesAsync()
+        public async Task<List<orden>?> GetOrdenesAsync()
         {
             var response = await _httpClient.GetAsync("/api/Orden");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<List<Orden>>(json, new JsonSerializerOptions
+                return JsonSerializer.Deserialize<List<orden>>(json, new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 });
@@ -39,7 +39,7 @@ namespace GestorPedidosEmpresarialesApp.Services
         
 
         // POST: Crear nueva orden
-        public async Task<string> AddOrdenAsync(Orden orden)
+        public async Task<string> AddOrdenAsync(orden orden)
         {
             var response = await _httpClient.PostAsJsonAsync("/api/Orden", orden);
             var json = await response.Content.ReadAsStringAsync();

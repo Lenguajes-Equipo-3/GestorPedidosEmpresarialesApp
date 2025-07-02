@@ -44,7 +44,13 @@ namespace GestorPedidosEmpresarialesApp.Models
             get => eliminado;
             set { eliminado = value; OnPropertyChanged(); }
         }
-
+        public void CalcularPrecioLinea()
+        {
+            if (VarianteProducto != null)
+                PrecioLinea = Cantidad * (Double)VarianteProducto.Precio;
+            else
+                PrecioLinea = 0.0;
+        }
         // Notificación de cambios para WPF
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string? name = null)

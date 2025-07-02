@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using GestorPedidosEmpresarialesApp.Models;
 using GestorPedidosEmpresarialesApp.Services;
+using GestorPedidosEmpresarialesApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,10 +21,10 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
         private string filtroNombreCliente = "";
 
         [ObservableProperty]
-        private ObservableCollection<Orden> ordenes = new(); 
+        private ObservableCollection<orden> ordenes = new(); 
 
         [ObservableProperty]
-        private Orden? ordenSeleccionada;
+        private orden? ordenSeleccionada;
 
         // Buscar por nombre de cliente
         [RelayCommand]
@@ -78,6 +79,16 @@ namespace GestorPedidosEmpresarialesApp.ViewModel
         {
             _ = VerTodasAsync();
         }
+
+        [RelayCommand]
+        public void NuevaOrden()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MainWindow.Instance.MainContent.Content = new OrdenMaestroDetalleUcView();
+            });
+        }
+
     }
 }
 

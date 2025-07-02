@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace GestorPedidosEmpresarialesApp
 {
     /// <summary>
@@ -20,10 +21,12 @@ namespace GestorPedidosEmpresarialesApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Instance { get; private set; }
         public MainWindow()
         {
             InitializeComponent();
             CargarInicio();
+             Instance = this; 
         }
 
         private void CargarInicio()
@@ -54,14 +57,9 @@ namespace GestorPedidosEmpresarialesApp
             this.Close();
         }
 
-        private void Ejemplo_Click(object sender, RoutedEventArgs e)
+        private void MenuParametros_Click(object sender, RoutedEventArgs e)
         {
-            // < MenuItem Header = "Clientes" Click = "Ejemplo_Click" /> ejemplo de la etiquertata
-            // Instancia la nueva ventana
-            //  var ventanaClientes = new ClientesWindow();
-            // Muestra la ventana
-            // ventanaClientes.Show();
-
+            this.MainContent.Content = new ParametrosView();
         }
 
         private void AbrirProductoBaseView_Click(object sender, RoutedEventArgs e)
@@ -83,6 +81,14 @@ namespace GestorPedidosEmpresarialesApp
             productoVarianteView.Show();
         }
 
+
+        
+        private void AbrirOrdenesView_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainContent.Content = new OrdenesListView();
+
+        }
+
         private void AbrirDepartamentoView_Click(object sender, RoutedEventArgs e)
         {
             var departamentoView = new DepartamentoView();
@@ -100,6 +106,7 @@ namespace GestorPedidosEmpresarialesApp
             var empleadosView = new EmpleadoView();
             empleadosView.Show();
         }
+
         private void MenuItem_Roles_Click(object sender, RoutedEventArgs e)
         {
             var rolView = new RolView();
@@ -110,5 +117,6 @@ namespace GestorPedidosEmpresarialesApp
         {
 
         }
+
     }
 }

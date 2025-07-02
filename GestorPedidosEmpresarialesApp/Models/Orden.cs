@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GestorPedidosEmpresarialesApp.Models
 {
-    public class Orden : INotifyPropertyChanged
+    public class orden : INotifyPropertyChanged
     {
         private int idOrden;
         public int IdOrden

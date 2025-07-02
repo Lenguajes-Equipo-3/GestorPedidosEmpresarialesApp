@@ -1,0 +1,220 @@
+﻿<UserControl x:Class="GestorPedidosEmpresarialesApp.Views.OrdenMaestroDetalleUcView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
+             Background="#FF2D2D3A">
+    <UserControl.DataContext>
+        <vm:OrdenMaestroDetalleViewModel/>
+    </UserControl.DataContext>
+
+
+    <UserControl.Resources>
+        <Style x:Key="BotonAzul" TargetType="Button">
+            <Setter Property="Background" Value="#5faee3"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="8,2"/>
+            <Setter Property="Margin" Value="6"/>
+            <Setter Property="BorderBrush" Value="#5faee3"/>
+        </Style>
+        <Style x:Key="BotonVerde" TargetType="Button">
+            <Setter Property="Background" Value="#19c37d"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Padding" Value="8,2"/>
+            <Setter Property="Margin" Value="6"/>
+            <Setter Property="BorderBrush" Value="#19c37d"/>
+        </Style>
+        <Style x:Key="BotonRojo" TargetType="Button">
+            <Setter Property="Background" Value="#f20c0c"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Padding" Value="8,2"/>
+            <Setter Property="Margin" Value="6"/>
+            <Setter Property="BorderBrush" Value="#f20c0c"/>
+        </Style>
+        <Style x:Key="CabeceraGrid" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#3870af"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#161936" Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Título -->
+            <RowDefinition Height="Auto"/>
+            <!-- Cliente y botón -->
+            <RowDefinition Height="Auto"/>
+            <!-- Datos generales de la orden -->
+            <RowDefinition Height="Auto"/>
+            <!-- Encabezado detalle -->
+            <RowDefinition Height="Auto"/>
+            <!-- Campos agregar detalle -->
+            <RowDefinition Height="*"/>
+            <!-- DataGrid detalles -->
+            <RowDefinition Height="Auto"/>
+            <!-- Botón eliminar y totales -->
+            <RowDefinition Height="Auto"/>
+            <!-- Botones finales -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Título -->
+        <TextBlock Grid.Row="0" Text="NUEVA ORDEN" 
+               FontSize="28" FontWeight="Bold" Foreground="White"
+               Margin="0,0,0,10"/>
+
+        <!-- Cliente y botón -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBox Width="280" Margin="0,0,14,0" 
+                 Text="{Binding NombreCompletoCliente, Mode=OneWay}" 
+                 IsReadOnly="True" FontSize="18"/>
+            <Button Content="Buscar Cliente" Command="{Binding SeleccionarClienteCommand}"
+                Background="#6CB2EB" Foreground="White" Padding="16,3" FontSize="16"/>
+        </StackPanel>
+
+        <!-- Datos generales de la orden (país, provincia, ciudad, dirección, teléfono) -->
+        <UniformGrid Grid.Row="2" Columns="5" Margin="0,0,0,12" HorizontalAlignment="Left">
+            <StackPanel>
+                <TextBlock Grid.Row="0" Text="" 
+FontSize="28" FontWeight="Bold" Foreground="White"
+Margin="0,0,0,10"/>
+                <TextBlock Text="País" Foreground="White"/>
+                <TextBox Width="174" Text="{Binding Orden.PaisViaje}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Grid.Row="0" Text="" 
+FontSize="28" FontWeight="Bold" Foreground="White"
+Margin="0,0,0,10"/>
+                <TextBlock Text="Provincia" Foreground="White"/>
+                <TextBox Width="176" Text="{Binding Orden.ProvinciaViaje}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Grid.Row="0" Text="" 
+FontSize="28" FontWeight="Bold" Foreground="White"
+Margin="0,0,0,10"/>
+                <TextBlock Text="Ciudad" Foreground="White"/>
+                <TextBox Width="174" Text="{Binding Orden.CiudadViaje}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Grid.Row="0" Text="" 
+FontSize="28" FontWeight="Bold" Foreground="White"
+Margin="0,0,0,10"/>
+                <TextBlock Text="Dirección" Foreground="White"/>
+                <TextBox Width="189" Text="{Binding Orden.DireccionViaje}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Grid.Row="0" Text="" 
+FontSize="28" FontWeight="Bold" Foreground="White"
+Margin="0,0,0,10"/>
+                <TextBlock Text="Teléfono" Foreground="White"/>
+                <TextBox Width="202" Text="{Binding Orden.TelefonoViaje}" />
+            </StackPanel>
+        </UniformGrid>
+
+        <!-- Encabezado de agregar producto -->
+        <TextBlock Grid.Row="3" Text="Agregar Detalle de Producto" FontWeight="Bold"
+               Foreground="White" FontSize="17" Margin="0,0,0,4"/>
+
+        <!-- Campos para agregar detalle -->
+        <StackPanel  Grid.Row="4" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Buscar Producto"
+ Command="{Binding BuscarProductoCommand}"
+ Background="#6CB2EB" Foreground="White" Padding="14,2"/>
+            <TextBlock Text="ID" Foreground="White"/>
+            <TextBox Width="60" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.VarianteProducto.IdVariante, Mode=OneWay}" IsReadOnly="True"/>
+
+            <TextBlock Text="Nombre" Foreground="White"/>
+            <TextBox Width="120" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.VarianteProducto.ProductoBase.NombreProducto, Mode=OneWay}" IsReadOnly="True"/>
+
+            <TextBlock Text="Descripcion" Foreground="White"/>
+            <TextBox Width="120" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.VarianteProducto.Descripcion, Mode=OneWay}" IsReadOnly="True"/>
+
+            <TextBlock Text="Cantidad" Foreground="White"/>
+            <TextBox Width="60" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.Cantidad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Precio" Foreground="White"/>
+            <TextBox Width="80" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.VarianteProducto.Precio, Mode=OneWay}" IsReadOnly="True"/>
+
+            <TextBlock Text="Total" Foreground="White"/>
+            <TextBox Width="80" Margin="0,0,6,0"
+             Text="{Binding DetalleOrden.PrecioLinea, Mode=OneWay}" IsReadOnly="True"/>
+
+            <Button Content="Agregar Detalle"
+            Command="{Binding AgregarDetalleCommand}"
+            Background="#6CB2EB" Foreground="White" Padding="14,2"/>
+
+        
+
+        </StackPanel>
+
+        <!-- DataGrid detalles -->
+        <DataGrid Grid.Row="5" 
+              ItemsSource="{Binding Orden.DetallesOrden}" 
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              HeadersVisibility="Column" Height="200" 
+              Margin="0,0,0,10"
+              Background="White">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id Producto" Binding="{Binding VarianteProducto.IdVariante}" Width="80"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding VarianteProducto.ProductoBase.NombreProducto}" Width="120"/>
+                <DataGridTextColumn Header="Descripción" Binding="{Binding VarianteProducto.Descripcion}" Width="120"/>
+                <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="80"/>
+                <DataGridTextColumn Header="Precio" Binding="{Binding VarianteProducto.Precio}" Width="90"/>
+                <DataGridTextColumn Header="Sub Total" Binding="{Binding PrecioLinea}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Botón eliminar y totales -->
+        <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="0,0,0,10" HorizontalAlignment="Left">
+            <Button Content="Eliminar detalle seleccionado" 
+                Command="{Binding EliminarDetalleCommand}" 
+                Background="#34B6C7" Foreground="White" Padding="16,2"/>
+        </StackPanel>
+
+        <!-- Totales y botones -->
+        <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="0,0,0,6" HorizontalAlignment="Left" >
+            <StackPanel>
+                <TextBlock Text="Total" Foreground="White"/>
+                <TextBox Width="100" Text="{Binding TotalPedido , Mode=OneWay}" IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Impuestos" Foreground="White"/>
+                <TextBox Width="100" Text="{Binding TotalImpuestos}" IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Total+ Impuesto" Foreground="White"/>
+                <TextBox Width="140" Text="{Binding TotalConImpuesto}" IsReadOnly="True"/>
+            </StackPanel>
+
+            <!-- Botones finales -->
+            <Button Content="Cancelar" Command="{Binding CancelarCommand}" 
+                Background="Red" Foreground="White" FontWeight="Bold"
+                Padding="24,6" Margin="20,0,10,0"/>
+            <Button Content="Crear Orden" Command="{Binding GuardarOrdenCommand}"
+                Background="LimeGreen" Foreground="White" FontWeight="Bold"
+                Padding="24,6"/>
+        </StackPanel>
+    </Grid>
+
+</UserControl>
