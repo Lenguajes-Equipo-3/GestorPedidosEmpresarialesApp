@@ -1,0 +1,247 @@
+﻿<Window x:Class="GestorPedidosEmpresarialesApp.Views.EmpleadoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:GestorPedidosEmpresarialesApp.ViewModel"
+        mc:Ignorable="d"
+        Title="Gestión de Empleados"
+        Height="650" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize">
+
+    <Window.DataContext>
+        <vm:EmpleadoViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="BackgroundColor" Color="#FF2D2D30"/>
+        <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#FF3F3F46"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#FF555555"/>
+        <SolidColorBrush x:Key="TextColor" Color="#FFE0E0E0"/>
+        <SolidColorBrush x:Key="HighlightColor" Color="#FF3E668A"/>
+        <SolidColorBrush x:Key="DisabledBackgroundColor" Color="#FF4A4A4A"/>
+        <SolidColorBrush x:Key="DisabledForegroundColor" Color="#FF888888"/>
+
+        <Style x:Key="BaseButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,12"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource DisabledBackgroundColor}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DisabledForegroundColor}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DataGridTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="Padding" Value="8"/>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="{StaticResource SecondaryBackgroundColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="VerticalGridLinesBrush" Value="{StaticResource BorderColor}"/>
+        </Style>
+        <Style x:Key="DarkDataGridRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="{StaticResource SecondaryBackgroundColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource HighlightColor}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource SecondaryBackgroundColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CaretBrush" Value="{StaticResource TextColor}"/>
+        </Style>
+        <ControlTemplate x:Key="DarkComboBoxTemplate" TargetType="ComboBox">
+            <Grid>
+                <ToggleButton x:Name="ToggleButton" Grid.Column="2" Focusable="false" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{TemplateBinding Foreground}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                    <ToggleButton.Style>
+                        <Style TargetType="ToggleButton">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="20"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path x:Name="Arrow" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z" Fill="{TemplateBinding Foreground}"/>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+                <ContentPresenter x:Name="ContentSite" IsHitTestVisible="False" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <Popup x:Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                    <Grid x:Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <Border x:Name="DropDownBorder" Background="{StaticResource SecondaryBackgroundColor}" BorderThickness="1" BorderBrush="{StaticResource BorderColor}"/>
+                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                        </ScrollViewer>
+                    </Grid>
+                </Popup>
+            </Grid>
+        </ControlTemplate>
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="Background" Value="{StaticResource SecondaryBackgroundColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Template" Value="{StaticResource DarkComboBoxTemplate}"/>
+        </Style>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="Padding" Value="8"/>
+            <Style.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Background" Value="{StaticResource HighlightColor}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="NuevoButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="#FF2196F3"/>
+        </Style>
+        <Style x:Key="GuardarButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="#FF4CAF50"/>
+        </Style>
+        <Style x:Key="EliminarButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="#FFF44336"/>
+        </Style>
+        <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Padding" Value="5"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFF44336"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="{StaticResource BackgroundColor}" CornerRadius="15" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" MouseDown="Border_MouseDown">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="20,10,20,10">
+                <TextBlock Text="Gestión de Empleados" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Content="X" Click="CloseButton_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" FontWeight="Bold" Style="{StaticResource CloseButtonStyle}"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="15,0,15,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid Grid.Column="0" 
+                          ItemsSource="{Binding Empleados}" 
+                          SelectedItem="{Binding SelectedEmpleado, Mode=TwoWay}" 
+                          AutoGenerateColumns="False" 
+                          IsReadOnly="True" 
+                          CanUserAddRows="False" 
+                          SelectionMode="Single"
+                          RowStyle="{StaticResource DarkDataGridRowStyle}"
+                          HeadersVisibility="Column">
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#FF3E668A"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="White"/>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IdEmpleado}" Width="Auto" ElementStyle="{StaticResource DataGridTextStyle}"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding NombreEmpleado}" Width="*" ElementStyle="{StaticResource DataGridTextStyle}"/>
+                        <DataGridTextColumn Header="Apellidos" Binding="{Binding ApellidosEmpleado}" Width="*" ElementStyle="{StaticResource DataGridTextStyle}"/>
+                        <DataGridTextColumn Header="Puesto" Binding="{Binding Puesto}" Width="*" ElementStyle="{StaticResource DataGridTextStyle}"/>
+                        <DataGridTextColumn Header="Departamento" Binding="{Binding Departamento.NombreDepartamento}" Width="*" ElementStyle="{StaticResource DataGridTextStyle}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Border Grid.Column="1" Margin="10,0,0,0" Background="{StaticResource SecondaryBackgroundColor}" Padding="15" CornerRadius="5">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel DataContext="{Binding SelectedEmpleado}">
+                            <TextBlock Text="Detalles del Empleado"/>
+                            <TextBlock Text="Nombre"/>
+                            <TextBox Text="{Binding NombreEmpleado, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="Apellidos"/>
+                            <TextBox Text="{Binding ApellidosEmpleado, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="Puesto"/>
+                            <TextBox Text="{Binding Puesto, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="Extensión"/>
+                            <TextBox Text="{Binding Extension, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="Teléfono de Trabajo"/>
+                            <TextBox Text="{Binding TelefonoTrabajo, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="Departamento"/>
+                            <ComboBox ItemsSource="{Binding DataContext.Departamentos, RelativeSource={RelativeSource AncestorType=Window}}" SelectedItem="{Binding Departamento, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="NombreDepartamento"/>
+                            <TextBlock Text="Rol"/>
+                            <ComboBox ItemsSource="{Binding DataContext.Roles, RelativeSource={RelativeSource AncestorType=Window}}" SelectedItem="{Binding Rol, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="NombreRol"/>
+
+                            <Grid Margin="0,20,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Content="Nuevo" Command="{Binding DataContext.NuevoCommand, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource NuevoButtonStyle}"/>
+
+                                <Button Grid.Column="1" Content="{Binding DataContext.GuardarButtonText, RelativeSource={RelativeSource AncestorType=Window}}" Command="{Binding DataContext.GuardarCommand, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource GuardarButtonStyle}"/>
+
+                                <Button Grid.Column="2" Content="Eliminar" Command="{Binding DataContext.EliminarCommand, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource EliminarButtonStyle}"/>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
